@@ -1,12 +1,13 @@
 const path = require('path');
+const MyPlugin=require('./myPlugin')
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'src', 'index'),
   watch: true,
   output: {
-    path: __dirname + 'dist',
+    path: __dirname + '/dist',
     publicPath: '/dist/',
-    filename: "bundle.js",
+    filename: "bundle[hash].js",
     chunkFilename: '[name].js'
   },
   module: {
@@ -30,14 +31,15 @@ module.exports = {
       }
     }]
   },
+  plugins:[new MyPlugin()],
   resolve: {
     extensions: ['.json', '.js', '.jsx']
   },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.join('/dist/'),
-    inline: true,
-    host: '0.0.0.0',
-    port: 8080,
-  }
+  // devtool: 'source-map',
+  // devServer: {
+  //   contentBase: path.join('/dist/'),
+  //   inline: true,
+  //   host: '0.0.0.0',
+  //   port: 8080,
+  // }
 };
